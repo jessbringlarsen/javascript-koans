@@ -40,7 +40,6 @@ describe("About Applying What We Have Learnt", function() {
       var productsICanEat = [];
 
       /* solve using filter() & all() / any() */
-      //productsICanEat = _(products).filter(function(x) { return x.containsNuts === false && _(x.ingredients).all(function(x) { x != "mushrooms"}) });
       productsICanEat = _(products).filter(function(x) { return x.containsNuts === false && !_.contains(x.ingredients, "mushrooms") });
       expect(productsICanEat.length).toBe(1);
   });
@@ -56,14 +55,23 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
 
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(233168);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+    var reduceFunction = function(sum, x) { 
+	if(x % 3 == 0 || x % 5 == 0) { 
+		return sum + x
+	} 
+	return sum
+    };
 
-    expect(233168).toBe(FILL_ME_IN);
+    var sum = _(_.range(3, 1000))
+	.chain()
+	.reduce(reduceFunction).value();    /* try chaining range() and reduce() */
+
+    expect(233168).toBe(sum);
   });
 
   /*********************************************************************************/
